@@ -1,0 +1,45 @@
+# 服务器本机代理：程序 -> 机场前置 -> 住宅代理 -> 目标网站
+# 使用前只需修改标有【必填】的 5 项；原样下载的文件是模板，不能直接连接。
+
+mixed-port: 18080                  # HTTP、SOCKS5 共用此端口
+allow-lan: false                   # 只给本机程序使用
+bind-address: "127.0.0.1"
+mode: rule
+log-level: info
+ipv6: false
+
+proxy-providers:
+  AIRPORT_SUB:
+    type: http
+    url: "https://example.com/REPLACE_WITH_YOUR_SUBSCRIPTION" # 【必填 1】自己的 Mihomo/Clash 节点订阅链接
+    path: ./providers/airport.yaml
+    interval: 86400                # 每天更新一次机场节点
+    proxy: DIRECT                  # 订阅下载先直连，避免尚无节点时无法启动
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+
+proxies:
+  - name: RESIDENTIAL
+    type: socks5                   # 住宅商提供 HTTP 时，改成 http；普通 HTTP 无需 tls: true
+    server: "YOUR_RESIDENTIAL_HOST" # 【必填 2】住宅代理 IP 或域名；不要填协议、端口、账号密码
+    port: 12345                    # 【必填 3】住宅代理端口，替换成商家提供的数字
+    username: "YOUR_USERNAME"      # 【必填 4】住宅代理用户名
+    password: "YOUR_PASSWORD"      # 【必填 5】住宅代理密码
+    dialer-proxy: AIRPORT          # 关键：先经机场连接住宅代理；不要删除这一行
+
+proxy-groups:
+  - name: AIRPORT
+    type: fallback                 # 按订阅顺序使用可用节点，故障时切换
+    proxies:
+      - REJECT                     # 无可用机场节点时拒绝连接；不要改成 DIRECT
+    use:
+      - AIRPORT_SUB
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+    # 默认允许全部机场节点；只用新加坡时可取消下一行注释，并确认订阅中有匹配节点。
+    # filter: "(?i)新加坡|singapore|🇸🇬"
+
+rules:
+  - MATCH,RESIDENTIAL              # 交给此代理端口的目标请求统一走住宅出口

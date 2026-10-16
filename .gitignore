@@ -1,0 +1,13 @@
+# 使用者填写的真实凭据和运行时文件
+/config.yaml
+/config.local.yaml
+/mihomo
+/providers/
+/cache.db
+/*.log
+/*.pid
+/.env
+/.env.*
+/Country.mmdb
+/GeoIP.dat
+/GeoSite.dat
