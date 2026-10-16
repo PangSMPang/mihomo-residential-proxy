@@ -1,0 +1,25 @@
+{
+  "upstream": "MetaCubeX/mihomo",
+  "version": "v1.19.31",
+  "release_url": "https://github.com/MetaCubeX/mihomo/releases/tag/v1.19.31",
+  "assets": [
+    {
+      "file": "core/mihomo-linux-amd64-v1-v1.19.31.gz",
+      "url": "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.31/mihomo-linux-amd64-v1-v1.19.31.gz",
+      "sha256": "d4304c546c3cddcb6fafd4b4fddb0ba1a95ffa36606fda56d75db2e59ad24114",
+      "size": 22821828
+    },
+    {
+      "file": "core/mihomo-linux-arm64-v1.19.31.gz",
+      "url": "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.31/mihomo-linux-arm64-v1.19.31.gz",
+      "sha256": "9e0f11afbf38426b8bd88fdc594678f8161c57eccb4e1b77acb12b493904f1d4",
+      "size": 20757911
+    }
+  ],
+  "source": {
+    "file": "third-party/mihomo-v1.19.31-source.tar.gz",
+    "url": "https://api.github.com/repos/MetaCubeX/mihomo/tarball/v1.19.31",
+    "sha256": "676732158479254de38ea5a78aa32ff650ce2d3a78156a0edc2ff0cb5c2ddfd8",
+    "archive_root": "MetaCubeX-mihomo-ab405ba"
+  }
+}
