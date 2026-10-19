@@ -41,8 +41,6 @@ proxy-groups:
       - AIRPORT_SUB
     url: "https://www.gstatic.com/generate_204"
     interval: 300
-    # 默认允许全部机场节点；只用新加坡时可取消下一行注释，并确认订阅中有匹配节点。
-    # filter: "(?i)新加坡|singapore|🇸🇬"
 
 rules:
   - MATCH,RESIDENTIAL              # 交给此代理端口的目标请求统一走住宅出口
